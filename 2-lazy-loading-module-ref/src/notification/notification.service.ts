@@ -18,6 +18,12 @@ export class NotificationService {
     message: string,
   ) {
     const service = await this.getService(type);
+
+    if (!service) {
+      this.logger.error(`Unsupported notification type: ${type}`);
+      return;
+    }
+
     service.send(recipient, message);
   }
 
@@ -25,8 +31,14 @@ export class NotificationService {
     const serviceFactory = {
       email: async () => {
         if (!this.emailService) {
+          this.logger.log(
+            `Is instance of EmailService: ${this.emailService instanceof EmailService}`,
+          );
           this.logger.log('Initializing EmailService lazily...');
           this.emailService = await this.moduleRef.create(EmailService);
+          this.logger.log(
+            `Is instance of EmailService: ${this.emailService instanceof EmailService}`,
+          );
         }
         return {
           send: (recipient: string, message: string) =>
@@ -35,8 +47,15 @@ export class NotificationService {
       },
       sms: async () => {
         if (!this.smsService) {
+          // Logar instancia de smsService
+          this.logger.log(
+            `Is instance of SmsService: ${this.smsService instanceof SmsService}`,
+          );
           this.logger.log('Initializing SmsService lazily...');
           this.smsService = await this.moduleRef.create(SmsService);
+          this.logger.log(
+            `Is instance of SmsService: ${this.smsService instanceof SmsService}`,
+          );
         }
         return {
           send: (recipient: string, message: string) =>
@@ -46,8 +65,9 @@ export class NotificationService {
     };
 
     const serviceCreator = serviceFactory[type];
+
     if (!serviceCreator) {
-      throw new Error(`Unsupported notification type: ${type}`);
+      return;
     }
 
     return serviceCreator();
