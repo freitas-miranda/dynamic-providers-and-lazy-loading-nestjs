@@ -17,18 +17,39 @@ export class NotificationService {
     recipient: string,
     message: string,
   ) {
-    if (type === 'email') {
-      if (!this.emailService) {
-        this.logger.log('Initializing EmailService lazily...');
-        this.emailService = await this.moduleRef.create(EmailService);
-      }
-      this.emailService.sendEmail(recipient, message);
-    } else if (type === 'sms') {
-      if (!this.smsService) {
-        this.logger.log('Initializing SmsService lazily...');
-        this.smsService = await this.moduleRef.create(SmsService);
-      }
-      this.smsService.sendSms(recipient, message);
+    const service = await this.getService(type);
+    service.send(recipient, message);
+  }
+
+  private async getService(type: 'email' | 'sms') {
+    const serviceFactory = {
+      email: async () => {
+        if (!this.emailService) {
+          this.logger.log('Initializing EmailService lazily...');
+          this.emailService = await this.moduleRef.create(EmailService);
+        }
+        return {
+          send: (recipient: string, message: string) =>
+            this.emailService!.sendEmail(recipient, message),
+        };
+      },
+      sms: async () => {
+        if (!this.smsService) {
+          this.logger.log('Initializing SmsService lazily...');
+          this.smsService = await this.moduleRef.create(SmsService);
+        }
+        return {
+          send: (recipient: string, message: string) =>
+            this.smsService!.sendSms(recipient, message),
+        };
+      },
+    };
+
+    const serviceCreator = serviceFactory[type];
+    if (!serviceCreator) {
+      throw new Error(`Unsupported notification type: ${type}`);
     }
+
+    return serviceCreator();
   }
 }
