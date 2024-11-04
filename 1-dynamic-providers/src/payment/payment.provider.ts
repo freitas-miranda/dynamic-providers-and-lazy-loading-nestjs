@@ -1,6 +1,6 @@
-import { PagarmePaymentService } from './pagarme-payment.service';
-import { AarinPaymentService } from './aarin-payment.service';
 import { ConfigService } from '@nestjs/config';
+import { AarinPaymentService } from './aarin-payment.service';
+import { PagarmePaymentService } from './pagarme-payment.service';
 
 export const PaymentProvider = {
   provide: 'PaymentService',
