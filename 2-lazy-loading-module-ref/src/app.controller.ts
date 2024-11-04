@@ -1,12 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Query } from '@nestjs/common';
+import { NotificationService } from './notification/notification.service';
 
-@Controller()
+@Controller('notify')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private notificationService: NotificationService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async notify(
+    @Query('type') type: 'email' | 'sms',
+    @Query('recipient') recipient: string,
+    @Query('message') message: string,
+  ) {
+    await this.notificationService.sendNotification(type, recipient, message);
+    return { status: 'Notification sent' };
   }
 }
