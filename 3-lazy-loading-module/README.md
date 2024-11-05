@@ -1,4 +1,4 @@
-# Projeto NestJS com Lazy Loading Modular usando ModuleRef
+# Projeto NestJS | Lazy Loading Module
 
 Este projeto demonstra como utilizar o Lazy Loading Modular com ModuleRef no NestJS. A aplicação inclui um serviço de notificação que pode enviar mensagens via email ou SMS, carregando os serviços de forma lazy.
 
@@ -12,14 +12,14 @@ Lazy Loading Modular é útil quando queremos melhorar a performance da aplicaç
 
 Para testar o envio de notificação por email, execute o seguinte comando:
 ```bash
-curl 'http://localhost:3000/notify?type=email&recipient=test@example.com&message=Hello!'
+curl 'http://localhost:3000/notify?type=email&message=Hello!'
 ```
 
 ### Enviar Notificação por SMS
 
 Para testar o envio de notificação por SMS, execute o seguinte comando:
 ```bash
-curl 'http://localhost:3000/notify?type=sms&recipient=69999999999&message=Hello!'
+curl 'http://localhost:3000/notify?type=sms&message=Hello!'
 ```
 
 ## Estrutura do Projeto

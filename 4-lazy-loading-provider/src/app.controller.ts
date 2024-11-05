@@ -8,10 +8,9 @@ export class AppController {
   @Get()
   async notify(
     @Query('type') type: 'email' | 'sms',
-    @Query('recipient') recipient: string,
     @Query('message') message: string,
   ) {
-    await this.notificationService.sendNotification(type, recipient, message);
+    await this.notificationService.sendNotification(type, message);
     return { status: 'Notification sent' };
   }
 }
