@@ -24,8 +24,6 @@ curl 'http://localhost:3000/notify?type=sms&message=Hello!'
 
 ## Estrutura do Projeto
 
-## Estrutura do Projeto
-
 - **src/**
   - **app.module.ts**: Módulo principal da aplicação.
   - **main.ts**: Arquivo de inicialização da aplicação.
