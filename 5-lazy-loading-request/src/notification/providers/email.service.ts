@@ -1,6 +1,6 @@
-import { Injectable, Logger, Scope } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class EmailService {
   private readonly logger = new Logger(EmailService.name);
 
