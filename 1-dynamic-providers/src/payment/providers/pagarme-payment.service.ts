@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PaymentService } from './payment.service';
+import { IPaymentService } from '../payment.interface';
 
 @Injectable()
-export class PagarmePaymentService implements PaymentService {
+export class PagarmePaymentService implements IPaymentService {
   private readonly logger = new Logger(PagarmePaymentService.name);
 
   processPayment() {

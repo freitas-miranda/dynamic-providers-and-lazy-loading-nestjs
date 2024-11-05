@@ -25,11 +25,12 @@ curl 'http://localhost:3000/notify?type=sms&message=Hello!'
 ## Estrutura do Projeto
 
 - **src/**
-  - **app.module.ts**: Módulo principal da aplicação.
   - **main.ts**: Arquivo de inicialização da aplicação.
+  - **app.module.ts**: Módulo principal da aplicação.
+  - **app.controller.ts**: Controlador principal da aplicação.
   - **notification/**
     - **notification.module.ts**: Módulo de notificação.
     - **notification.service.ts**: Serviço de notificação que gerencia o envio de mensagens.
-    - **email.service.ts**: Serviço de envio de emails.
-    - **sms.service.ts**: Serviço de envio de SMS.
-  - **app.controller.ts**: Controlador principal da aplicação.
+    - **providers/**
+      - **email.service.ts**: Serviço de envio de emails.
+      - **sms.service.ts**: Serviço de envio de SMS.

@@ -15,6 +15,7 @@ export class AppController {
     if (!this.notificationModuleRef) {
       this.notificationModuleRef = await this.lazyModuleLoader.load(() => NotificationModule);
     }
+
     // Resolver o NotificationService usando ModuleRef
     const notificationService = this.notificationModuleRef.get(NotificationService);
 

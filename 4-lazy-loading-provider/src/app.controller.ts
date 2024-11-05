@@ -6,10 +6,7 @@ export class AppController {
   constructor(private notificationService: NotificationService) {}
 
   @Get()
-  async notify(
-    @Query('type') type: 'email' | 'sms',
-    @Query('message') message: string,
-  ) {
+  async notify(@Query('type') type: 'email' | 'sms', @Query('message') message: string) {
     await this.notificationService.sendNotification(type, message);
     return { status: 'Notification sent' };
   }

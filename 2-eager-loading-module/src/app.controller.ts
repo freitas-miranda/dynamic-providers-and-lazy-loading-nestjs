@@ -1,5 +1,4 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { NotificationModule } from './notification/notification.module';
 import { NotificationService } from './notification/notification.service';
 
 @Controller('notify')

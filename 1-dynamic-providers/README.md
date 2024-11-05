@@ -1,6 +1,6 @@
-# Providers Baseados em Factories Dinâmicas
+# Projeto NestJS | Providers Baseados em Factories Dinâmicas
 
-Este documento explica a utilização de Providers Baseados em Factories Dinâmicas no NestJS. Esse tipo de provider cria dependências com base em configurações passadas dinamicamente.
+Este projeto demonstra a utilização de Providers Baseados em Factories Dinâmicas no NestJS. Esse tipo de provider cria dependências com base em configurações passadas dinamicamente.
 
 ## Quando Usar
 
@@ -90,6 +90,14 @@ export class PaymentProcessor {
 }
 ```
 
-## Conclusão
+## Estrutura do Projeto
 
-Providers Baseados em Factories Dinâmicas são uma poderosa ferramenta no NestJS para criar dependências configuráveis dinamicamente. Eles permitem maior flexibilidade e adaptabilidade no desenvolvimento de aplicações.
+- **src/**
+  - **main.ts**: Arquivo de inicialização da aplicação.
+  - **app.module.ts**: Módulo principal da aplicação.
+  - **payment/**
+    - **payment.interface.ts**: Interface para os services de pagamento.
+    - **payment.provider.ts**: Criação do provider de pagamento.
+    - **providers/**
+      - **aarin-payment.service.ts**: Serviço de pagamento com Aarin.
+      - **pagarme-payment.service.ts**: Serviço de pagamento com Pagar.me.
